@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="format-detection" content="telephone=no,email=no,address=no,url=no">
   <title>RAMOS</title>
   <link rel="icon" type="image/png" href="assets/white_logo.png" />
 
@@ -20,17 +21,16 @@
     .containervideo {
       text-align: center;
       background: #fff;
-      overflow: hidden;       /* recorta cualquier borde extra */
+      overflow: hidden;       /* recorta cualquier borde */
       display: inline-block;
-      width: 300px;           /* el ancho que quieras */
-      height: auto;           /* se ajusta a la proporción del video */
-      box-sizing: border-box;
+      width: 300px;           /* ancho del video */
+      height: auto;
     }
 
     .containervideo video {
       width: 101%;            /* overshoot para eliminar línea negra */
-      height: 101%;           /* overshoot vertical */
-      object-fit: cover;
+      height: 101%;
+      object-fit: cover;      /* cubre todo el contenedor */
       display: block;
     }
 
@@ -146,14 +146,12 @@
 
     submitBtn.addEventListener('click', () => {
       const value = passwordInput.value;
-
       if (value === correctPassword) {
         window.location.href = redirectUrl;
       } else {
         passwordInput.value = '';
         passwordInput.placeholder = 'Incorrecto';
         passwordInput.style.borderColor = 'red';
-
         setTimeout(() => {
           passwordInput.placeholder = 'Password';
           passwordInput.style.borderColor = '#000';
