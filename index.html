@@ -150,6 +150,15 @@
         }, 1200);
       }
     });
+
+    const video = document.querySelector('video');
+video.addEventListener('timeupdate', () => {
+  if (video.currentTime > video.duration - 0.05) { // 0.05 segundos antes del final
+    video.currentTime = 0;
+    video.play();
+  }
+});
+
   </script>
 </body>
 </html>
