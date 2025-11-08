@@ -1,1 +1,165 @@
-<!doctype html> <html lang="es"> <head> <meta charset="utf-8" /> <meta name="viewport" content="width=device-width,initial-scale=1" /> <meta name="format-detection" content="telephone=no,email=no,address=no,url=no"> <title>RAMOS</title> <link rel="icon" type="image/png" href="assets/white_logo.png" /> <style> body { background: #fff; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; font-family: 'Inter', sans-serif; } .container { text-align: center; } .containervideo { text-align: center; background: #fff; } video { width: 300px; height: auto; display: block; margin: 0 auto 30px; } .password-btn, .back-btn { color: #000; display: inline-flex; align-items: center; gap: 8px; border: none; background: none; font-size: 16px; cursor: pointer; letter-spacing: 1px; text-transform: uppercase; font-weight: 500; } .lock-icon { width: 16px; height: 16px; fill: #000; } .arrow-icon { width: 16px; height: 16px; fill: #fff; } .form-container { display: none; margin-top: 20px; } .form-container input { padding: 10px 14px; font-size: 15px; border: 1px solid #000; border-radius: 4px; outline: none; width: 180px; } .form-container button { background: #000; color: #fff; border: none; padding: 10px 16px; font-size: 14px; border-radius: 4px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; margin-left: 6px; } .form-container button:hover { opacity: 0.9; } .back-btn { margin-top: 20px; } </style> </head> <body> <div class="containervideo"> <video src="logo-VEED.mov" autoplay loop muted playsinline></video> <button class="password-btn" id="showPasswordBtn"> <svg class="lock-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"> <path d="M12 1a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V11a2 2 0 0 0-2-2h-1V6a5 5 0 0 0-5-5Zm-3 8V6a3 3 0 0 1 6 0v3H9Zm3 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" /> </svg> <span>Password</span> </button> <div class="form-container" id="formContainer"> <input type="password" id="passwordInput" placeholder="Password" /> <button id="submitBtn">Submit</button> <br> <button class="back-btn" id="backBtn"> <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"> <path d="M15 18l-6-6 6-6" /> </svg> <span>Volver</span> </button> </div> </div> <script> const correctPassword = 'ramos'; // Cambia esto const redirectUrl = 'pagina_secreta.html'; // Cambia esto const showPasswordBtn = document.getElementById('showPasswordBtn'); const formContainer = document.getElementById('formContainer'); const passwordInput = document.getElementById('passwordInput'); const submitBtn = document.getElementById('submitBtn'); const backBtn = document.getElementById('backBtn'); showPasswordBtn.addEventListener('click', () => { showPasswordBtn.style.display = 'none'; formContainer.style.display = 'inline-block'; passwordInput.focus(); }); backBtn.addEventListener('click', () => { formContainer.style.display = 'none'; showPasswordBtn.style.display = 'inline-flex'; passwordInput.value = ''; }); submitBtn.addEventListener('click', () => { const value = passwordInput.value; if (value === correctPassword) { window.location.href = redirectUrl; } else { passwordInput.value = ''; passwordInput.placeholder = 'Incorrecto'; passwordInput.style.borderColor = 'red'; setTimeout(() => { passwordInput.placeholder = 'Password'; passwordInput.style.borderColor = '#000'; }, 1200); } }); </script> </body> </html>
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>RAMOS</title>
+  <link rel="icon" type="image/png" href="assets/white_logo.png" />
+
+  <style>
+    body {
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .containervideo {
+      text-align: center;
+      background: #fff;
+      overflow: hidden;       /* recorta cualquier borde extra */
+      display: inline-block;
+      width: 300px;           /* el ancho que quieras */
+      height: auto;           /* se ajusta a la proporción del video */
+      box-sizing: border-box;
+    }
+
+    .containervideo video {
+      width: 101%;            /* overshoot para eliminar línea negra */
+      height: 101%;           /* overshoot vertical */
+      object-fit: cover;
+      display: block;
+    }
+
+    .password-btn,
+    .back-btn {
+      color: #000;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: none;
+      background: none;
+      font-size: 16px;
+      cursor: pointer;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .lock-icon {
+      width: 16px;
+      height: 16px;
+      fill: #000;
+    }
+
+    .arrow-icon {
+      width: 16px;
+      height: 16px;
+      fill: #fff;
+    }
+
+    .form-container {
+      display: none;
+      margin-top: 20px;
+    }
+
+    .form-container input {
+      padding: 10px 14px;
+      font-size: 15px;
+      border: 1px solid #000;
+      border-radius: 4px;
+      outline: none;
+      width: 180px;
+    }
+
+    .form-container button {
+      background: #000;
+      color: #fff;
+      border: none;
+      padding: 10px 16px;
+      font-size: 14px;
+      border-radius: 4px;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-left: 6px;
+    }
+
+    .form-container button:hover {
+      opacity: 0.9;
+    }
+
+    .back-btn {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="containervideo">
+    <video src="logo-VEED.mp4" autoplay loop muted playsinline></video>
+
+    <button class="password-btn" id="showPasswordBtn">
+      <svg class="lock-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M12 1a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V11a2 2 0 0 0-2-2h-1V6a5 5 0 0 0-5-5Zm-3 8V6a3 3 0 0 1 6 0v3H9Zm3 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
+      </svg>
+      <span>Password</span>
+    </button>
+
+    <div class="form-container" id="formContainer">
+      <input type="password" id="passwordInput" placeholder="Password" />
+      <button id="submitBtn">Submit</button>
+      <br>
+      <button class="back-btn" id="backBtn">
+        <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M15 18l-6-6 6-6"/>
+        </svg>
+        <span>Volver</span>
+      </button>
+    </div>
+  </div>
+
+  <script>
+    const correctPassword = 'ramos';
+    const redirectUrl = 'pagina_secreta.html';
+
+    const showPasswordBtn = document.getElementById('showPasswordBtn');
+    const formContainer = document.getElementById('formContainer');
+    const passwordInput = document.getElementById('passwordInput');
+    const submitBtn = document.getElementById('submitBtn');
+    const backBtn = document.getElementById('backBtn');
+
+    showPasswordBtn.addEventListener('click', () => {
+      showPasswordBtn.style.display = 'none';
+      formContainer.style.display = 'inline-block';
+      passwordInput.focus();
+    });
+
+    backBtn.addEventListener('click', () => {
+      formContainer.style.display = 'none';
+      showPasswordBtn.style.display = 'inline-flex';
+      passwordInput.value = '';
+    });
+
+    submitBtn.addEventListener('click', () => {
+      const value = passwordInput.value;
+
+      if (value === correctPassword) {
+        window.location.href = redirectUrl;
+      } else {
+        passwordInput.value = '';
+        passwordInput.placeholder = 'Incorrecto';
+        passwordInput.style.borderColor = 'red';
+
+        setTimeout(() => {
+          passwordInput.placeholder = 'Password';
+          passwordInput.style.borderColor = '#000';
+        }, 1200);
+      }
+    });
+  </script>
+</body>
+</html>
