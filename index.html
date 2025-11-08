@@ -18,19 +18,17 @@
     }
 
     .containervideo {
-      text-align: center;
       background: #fff;
-      overflow: hidden;       /* recorta cualquier borde extra */
+      overflow: hidden;
       display: inline-block;
-      width: 300px;           /* el ancho que quieras */
-      height: auto;           /* se ajusta a la proporción del video */
-      box-sizing: border-box;
+      aspect-ratio: 4 / 3; /* fuerza proporción correcta */
+      width: 300px;        /* ancho deseado */
     }
 
     .containervideo video {
-      width: 101%;            /* overshoot para eliminar línea negra */
-      height: 101%;           /* overshoot vertical */
-      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* cubre todo el contenedor */
       display: block;
     }
 
@@ -145,21 +143,4 @@
     });
 
     submitBtn.addEventListener('click', () => {
-      const value = passwordInput.value;
-
-      if (value === correctPassword) {
-        window.location.href = redirectUrl;
-      } else {
-        passwordInput.value = '';
-        passwordInput.placeholder = 'Incorrecto';
-        passwordInput.style.borderColor = 'red';
-
-        setTimeout(() => {
-          passwordInput.placeholder = 'Password';
-          passwordInput.style.borderColor = '#000';
-        }, 1200);
-      }
-    });
-  </script>
-</body>
-</html>
+      const value = passwordInput.v
