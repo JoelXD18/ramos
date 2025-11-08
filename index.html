@@ -18,20 +18,22 @@
       font-family: 'Inter', sans-serif;
     }
 
-    .container {
-      text-align: center;
-    }
-
     .containervideo {
       text-align: center;
       background: #fff;
+      overflow: hidden;        /* recorta bordes extra */
+      display: inline-block;   /* para que width/height funcionen correctamente */
+      aspect-ratio: 4/3;       /* fuerza proporción correcta */
+      padding: 20px;
+      border-radius: 12px;     /* opcional, bordes redondeados */
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1); /* opcional, sombra suave */
     }
 
-    video {
-      width: 300px;
-      height: auto;
+    .containervideo video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;       /* cubre todo el contenedor */
       display: block;
-      margin: 0 auto 30px;
     }
 
     .password-btn,
@@ -104,8 +106,7 @@
 
     <button class="password-btn" id="showPasswordBtn">
       <svg class="lock-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <path
-          d="M12 1a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V11a2 2 0 0 0-2-2h-1V6a5 5 0 0 0-5-5Zm-3 8V6a3 3 0 0 1 6 0v3H9Zm3 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
+        <path d="M12 1a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V11a2 2 0 0 0-2-2h-1V6a5 5 0 0 0-5-5Zm-3 8V6a3 3 0 0 1 6 0v3H9Zm3 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
       </svg>
       <span>Password</span>
     </button>
