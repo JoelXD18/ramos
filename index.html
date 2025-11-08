@@ -3,7 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Página de contraseña</title>
+  <title>RAMOS</title>
+  <link rel="icon" type="image/png" href="assets/white_logo.png" />
   <style>
     body {
       background: #fff;
@@ -40,6 +41,12 @@
     .password-btn span {
       text-transform: uppercase;
       font-weight: 500;
+    }
+
+    .lock-icon {
+      width: 16px;
+      height: 16px;
+      fill: #000;
     }
 
     .form-container {
@@ -79,7 +86,7 @@
     <video src="assets/logo.webm" autoplay loop muted playsinline></video>
 
     <button class="password-btn" id="showPasswordBtn">
-      <span>🔒</span>
+      <svg class="lock-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 1a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V11a2 2 0 0 0-2-2h-1V6a5 5 0 0 0-5-5Zm-3 8V6a3 3 0 0 1 6 0v3H9Zm3 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/></svg>
       <span>PASSWORD</span>
     </button>
 
@@ -90,7 +97,7 @@
   </div>
 
   <script>
-    const correctPassword = 'ramos'; // Cambia esto
+    const correctPassword = 'tu_contraseña'; // Cambia esto
     const redirectUrl = 'pagina_secreta.html'; // Cambia esto
 
     const showPasswordBtn = document.getElementById('showPasswordBtn');
