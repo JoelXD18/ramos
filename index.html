@@ -27,7 +27,7 @@
       margin: 0 auto 30px;
     }
 
-    .password-btn {
+    .password-btn, .back-btn {
       display: inline-flex;
       align-items: center;
       gap: 8px;
@@ -36,14 +36,11 @@
       font-size: 16px;
       cursor: pointer;
       letter-spacing: 1px;
-    }
-
-    .password-btn span {
       text-transform: uppercase;
       font-weight: 500;
     }
 
-    .lock-icon {
+    .lock-icon, .arrow-icon {
       width: 16px;
       height: 16px;
       fill: #000;
@@ -79,6 +76,10 @@
     .form-container button:hover {
       opacity: 0.9;
     }
+
+    .back-btn {
+      margin-top: 20px;
+    }
   </style>
 </head>
 <body>
@@ -87,12 +88,17 @@
 
     <button class="password-btn" id="showPasswordBtn">
       <svg class="lock-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 1a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V11a2 2 0 0 0-2-2h-1V6a5 5 0 0 0-5-5Zm-3 8V6a3 3 0 0 1 6 0v3H9Zm3 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/></svg>
-      <span>PASSWORD</span>
+      <span>Password</span>
     </button>
 
     <div class="form-container" id="formContainer">
       <input type="password" id="passwordInput" placeholder="Password" />
       <button id="submitBtn">Submit</button>
+      <br>
+      <button class="back-btn" id="backBtn">
+        <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6" /></svg>
+        <span>Volver</span>
+      </button>
     </div>
   </div>
 
@@ -104,11 +110,18 @@
     const formContainer = document.getElementById('formContainer');
     const passwordInput = document.getElementById('passwordInput');
     const submitBtn = document.getElementById('submitBtn');
+    const backBtn = document.getElementById('backBtn');
 
     showPasswordBtn.addEventListener('click', () => {
       showPasswordBtn.style.display = 'none';
       formContainer.style.display = 'inline-block';
       passwordInput.focus();
+    });
+
+    backBtn.addEventListener('click', () => {
+      formContainer.style.display = 'none';
+      showPasswordBtn.style.display = 'inline-flex';
+      passwordInput.value = '';
     });
 
     submitBtn.addEventListener('click', () => {
