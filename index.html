@@ -5,103 +5,118 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Página de contraseña</title>
   <style>
-    :root{--bg:#ffffff;--accent:#111;--muted:#666}
-    html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial}
-    body{background:var(--bg);display:flex;align-items:center;justify-content:center}
-    .card{display:flex;flex-direction:column;align-items:center;gap:18px;padding:28px;border-radius:14px}
+    body {
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+    }
 
-    /* Video/logo */
-    .logo-wrap{width:320px;height:320px;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:12px}
-    video{width:100%;height:100%;object-fit:contain;animation:float 6s ease-in-out infinite}
-    @keyframes float{0%{transform:translateY(0) scale(1)}50%{transform:translateY(-6px) scale(1.02)}100%{transform:translateY(0) scale(1)}}
+    .container {
+      text-align: center;
+    }
 
-    /* Contraseña line */
-    .pw-line{display:flex;align-items:center;gap:10px}
-    .pw-btn{background:transparent;border:1.5px solid var(--accent);padding:8px 12px;border-radius:10px;font-size:16px;cursor:pointer;display:flex;align-items:center;gap:8px}
-    .pw-btn:active{transform:translateY(1px)}
+    video {
+      width: 300px;
+      height: auto;
+      display: block;
+      margin: 0 auto 30px;
+    }
 
-    /* Form */
-    .pw-form{display:none;align-items:center;gap:8px}
-    .pw-input{padding:8px 10px;border:1px solid #ddd;border-radius:8px;font-size:15px}
-    .send-btn{padding:8px 12px;border-radius:8px;border:1px solid var(--accent);background:transparent;cursor:pointer}
+    .password-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: none;
+      background: none;
+      font-size: 16px;
+      cursor: pointer;
+      letter-spacing: 1px;
+    }
 
-    .error{color:#b00020;font-size:14px;margin-top:6px;min-height:18px}
+    .password-btn span {
+      text-transform: uppercase;
+      font-weight: 500;
+    }
 
-    /* small screens */
-    @media (max-width:420px){.logo-wrap{width:260px;height:260px}}
+    .form-container {
+      display: none;
+      margin-top: 20px;
+    }
 
-    /* shake animation on error */
-    @keyframes shake{0%{transform:translateX(0)}25%{transform:translateX(-6px)}50%{transform:translateX(6px)}75%{transform:translateX(-4px)}100%{transform:translateX(0)}}
-    .shake{animation:shake .45s}
+    .form-container input {
+      padding: 10px 14px;
+      font-size: 15px;
+      border: 1px solid #000;
+      border-radius: 4px;
+      outline: none;
+      width: 180px;
+    }
+
+    .form-container button {
+      background: #000;
+      color: #fff;
+      border: none;
+      padding: 10px 16px;
+      font-size: 14px;
+      border-radius: 4px;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-left: 6px;
+    }
+
+    .form-container button:hover {
+      opacity: 0.9;
+    }
   </style>
 </head>
 <body>
-  <main class="card" role="main" aria-labelledby="title">
-    <div class="logo-wrap" aria-hidden="false">
-      <!-- Pon aquí tu archivo logo.webm en la misma carpeta -->
-      <video id="logoVideo" src="assets/logo.webm" autoplay loop muted playsinline></video>
-    </div>
+  <div class="container">
+    <video src="assets/logo.webm" autoplay loop muted playsinline></video>
 
-    <div style="text-align:center;">
-      <div class="pw-line">
-        <button id="showPwBtn" class="pw-btn" aria-expanded="false">
-          <span>Contraseña</span>
-          <span aria-hidden="true">🔒</span>
-        </button>
+    <button class="password-btn" id="showPasswordBtn">
+      <span>🔒</span>
+      <span>PASSWORD</span>
+    </button>
 
-        <form id="pwForm" class="pw-form" onsubmit="return false;" aria-hidden="true">
-          <input id="pwInput" class="pw-input" type="password" placeholder="Introduce la contraseña" aria-label="contraseña" />
-          <button id="sendBtn" class="send-btn" type="submit">Enviar</button>
-        </form>
-      </div>
-      <div id="errorMsg" class="error" role="status" aria-live="polite"></div>
+    <div class="form-container" id="formContainer">
+      <input type="password" id="passwordInput" placeholder="Password" />
+      <button id="submitBtn">Submit</button>
     </div>
-  </main>
+  </div>
 
   <script>
-    // CONFIGURA ESTAS CONSTANTES
-    const CORRECT_PASSWORD = 'ramos'; // <- cambia esto por la contraseña real
-    const REDIRECT_URL = 'pagina_secreta.html'; // <- cambia aquí la URL de destino
+    const correctPassword = 'ramos'; // Cambia esto
+    const redirectUrl = 'pagina_secreta.html'; // Cambia esto
 
-    const showPwBtn = document.getElementById('showPwBtn');
-    const pwForm = document.getElementById('pwForm');
-    const pwInput = document.getElementById('pwInput');
-    const sendBtn = document.getElementById('sendBtn');
-    const errorMsg = document.getElementById('errorMsg');
+    const showPasswordBtn = document.getElementById('showPasswordBtn');
+    const formContainer = document.getElementById('formContainer');
+    const passwordInput = document.getElementById('passwordInput');
+    const submitBtn = document.getElementById('submitBtn');
 
-    showPwBtn.addEventListener('click', () => {
-      // ocultar el botón "Contraseña" y mostrar el input + enviar
-      showPwBtn.style.display = 'none';
-      pwForm.style.display = 'flex';
-      pwForm.setAttribute('aria-hidden', 'false');
-      showPwBtn.setAttribute('aria-expanded', 'true');
-      pwInput.focus();
+    showPasswordBtn.addEventListener('click', () => {
+      showPasswordBtn.style.display = 'none';
+      formContainer.style.display = 'inline-block';
+      passwordInput.focus();
     });
 
-    function showError(text){
-      errorMsg.textContent = text;
-      pwInput.classList.add('shake');
-      setTimeout(()=> pwInput.classList.remove('shake'), 500);
-    }
-
-    function onSubmit(){
-      const val = pwInput.value || '';
-      // Comprobación simple. Si quieres más seguridad, compara hashes en servidor.
-      if(val === CORRECT_PASSWORD){
-        // redirige si es correcta
-        window.location.href = REDIRECT_URL;
+    submitBtn.addEventListener('click', () => {
+      const value = passwordInput.value;
+      if (value === correctPassword) {
+        window.location.href = redirectUrl;
       } else {
-        showError('Contraseña incorrecta. Intenta de nuevo.');
-        pwInput.value = '';
-        pwInput.focus();
+        passwordInput.value = '';
+        passwordInput.placeholder = 'Incorrecto';
+        passwordInput.style.borderColor = 'red';
+        setTimeout(() => {
+          passwordInput.placeholder = 'Password';
+          passwordInput.style.borderColor = '#000';
+        }, 1200);
       }
-    }
-
-    sendBtn.addEventListener('click', onSubmit);
-
-    // Permitir pulsar Enter
-    pwInput.addEventListener('keydown', (e) => {
-      if(e.key === 'Enter') onSubmit();
     });
   </script>
 </body>
