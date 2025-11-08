@@ -18,17 +18,19 @@
     }
 
     .containervideo {
+      text-align: center;
       background: #fff;
-      overflow: hidden;
+      overflow: hidden;       /* recorta cualquier borde extra */
       display: inline-block;
-      aspect-ratio: 4 / 3; /* fuerza proporción correcta */
-      width: 300px;        /* ancho deseado */
+      width: 300px;           /* el ancho que quieras */
+      height: auto;           /* se ajusta a la proporción del video */
+      box-sizing: border-box;
     }
 
     .containervideo video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover; /* cubre todo el contenedor */
+      width: 101%;            /* overshoot para eliminar línea negra */
+      height: 101%;           /* overshoot vertical */
+      object-fit: cover;
       display: block;
     }
 
@@ -98,7 +100,7 @@
 
 <body>
   <div class="containervideo">
-    <video src="logo-VEED.mp4" autoplay loop muted playsinline></video>
+    <video src="logo-VEED.mov" autoplay loop muted playsinline></video>
 
     <button class="password-btn" id="showPasswordBtn">
       <svg class="lock-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -143,4 +145,21 @@
     });
 
     submitBtn.addEventListener('click', () => {
-      const value = passwordInput.v
+      const value = passwordInput.value;
+
+      if (value === correctPassword) {
+        window.location.href = redirectUrl;
+      } else {
+        passwordInput.value = '';
+        passwordInput.placeholder = 'Incorrecto';
+        passwordInput.style.borderColor = 'red';
+
+        setTimeout(() => {
+          passwordInput.placeholder = 'Password';
+          passwordInput.style.borderColor = '#000';
+        }, 1200);
+      }
+    });
+  </script>
+</body>
+</html>
